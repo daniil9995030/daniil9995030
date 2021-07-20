@@ -1,0 +1,54 @@
+import pyaudio
+import speech_recognition as sr
+import pyttsx3
+import os
+import webbrowser
+import random
+start = pyttsx3.init()
+
+
+def listen():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("скажи что-нибудь")
+        r.pause_threshold = 1
+        r.adjust_for_ambient_noise(source, duration=1)
+        audio = r.listen(source)
+        try:
+            task = r.recognize_google(audio, language="ru-RU").lower()
+            print(task)
+        except:
+            task = listen()
+        return task
+
+
+def request(task):
+    hellows=["Привет", "Здравствуй", "Доброго времени суток"]
+    whyYou=["хорошо","все в поряде","все OK"]
+    if "как дела" in task:
+        text=random.choice(whyYou)
+        start.say(text)
+        start.runAndWait()
+    if "привет" in task:
+        text=random.choice(hellows)
+        start.say(text)
+        start.runAndWait()
+    if "youtube" in task:
+        start.say("Открываю youtube")
+        start.runAndWait()
+        webbrowser.open_new("https://www.youtube.com/")
+    if "google" in task:
+        start.say("Открываю гугл")
+        start.runAndWait()
+        webbrowser.open_new("https://www.google.com/")
+    if "блокнот" in task:
+        text = "открываю ваш блокнот"
+        start.say(text)
+        start.runAndWait()
+        os.system('notepad')
+
+
+while True:
+    request(listen())
+
+
