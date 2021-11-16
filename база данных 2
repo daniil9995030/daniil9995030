@@ -1,0 +1,12 @@
+import sqlite3
+db = sqlite3.connect("daniil.db")
+sql=db.cursor()
+sql.execute("""CREATE TABLE IF NOT EXISTS users(
+login TEXT,
+password TEXT,
+cash BIGINT
+)""")
+db.commit()
+user_login = input("login: ")
+user_password = input("password: ")
+sql.execute("SELECT login FROM users")
