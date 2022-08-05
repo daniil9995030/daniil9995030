@@ -1,0 +1,27 @@
+from tkinter import *
+
+def scale_get_value(slider_pars):
+    print ("slider1.get()", slider1.get())
+    print (slider_pars)
+    pass
+
+def set_red_color_val(red):
+    # #FF0000 - RED
+    new_color = F"#{red_color.get():02x}0000"
+    new_color_1 = F"#{(255-red_color.get()):02x}0000"
+    print (new_color)
+    slider2.config(activebackground = new_color_1 )
+    slider2.config(troughcolor = new_color )
+    pass
+
+root_window = Tk()
+root_window.title("Scale windget test")
+root_window.geometry("400x400")
+red_color = IntVar()
+red_color.set(0)
+slider1 = Scale(orient=HORIZONTAL, length=300, from_=100, to=1000, resolution=10, command=scale_get_value)
+slider2 = Scale(orient=HORIZONTAL, length=300, from_=0, to=255, variable=red_color, resolution=1, label="RED", command=set_red_color_val)
+slider2.pack()
+# slider1 = Scale(orient=VERTICAL)
+slider1.pack()
+root_window.mainloop()
