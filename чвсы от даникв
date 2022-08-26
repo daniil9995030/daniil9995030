@@ -1,0 +1,42 @@
+from tkinter import * 
+
+from tkinter.ttk import *
+
+from time import strftime
+
+  
+
+
+root = Tk()
+
+root.title('ЧАСЫ ОТ ДАНИКА')
+
+  
+
+
+def time():
+
+    string = strftime('%H:%M: ')
+
+    lbl.config(text = string)
+
+    lbl.after(10, time)
+
+  
+
+
+lbl = Label(root, font = ('calibri', 100, ''),
+
+            
+
+            foreground = 'red')
+
+  
+
+
+lbl.pack(anchor = 'center')
+
+time()
+
+  
+mainloop()
