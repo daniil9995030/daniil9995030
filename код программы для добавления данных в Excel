@@ -1,0 +1,9 @@
+from openpyxl import load_workbook
+fn="exmple.xlsx"
+
+wb=load_workbook(fn)
+ws=wb["data"]
+ws["A5"]="Daniil isailov 24"
+ws["A6"]="4000  зарплата"
+wb.save(fn)
+wb.close()
