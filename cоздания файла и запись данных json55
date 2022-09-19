@@ -1,0 +1,17 @@
+import json
+
+daniil= {
+
+
+    "daniil" : 610,
+}
+
+
+with open("daniil.json", "w") as json_file:
+    json.dump(daniil, json_file)
+
+
+json_daniil = json.dumps(daniil)
+print(json_daniil)
+
+
