@@ -1,0 +1,62 @@
+import os
+from tkinter import *
+from tkinter import filedialog
+from tkinter.ttk import *
+
+
+def get_selected(e):
+    print("Next selection")
+    for next_row in tree.selection():
+        item = tree.item(next_row)
+        print(item)
+        print(item["values"])
+        pass
+    print()
+    pass
+
+
+files = []
+
+
+def get_folder_content():
+
+    folder_path = filedialog.askdirectory()
+
+    for next_ent in os.scandir(folder_path):
+        files.append([next_ent.name, next_ent.path, next_ent.stat().st_size])
+        print(files)
+
+        pass
+
+    for next_f in files:
+        tree.insert(parent="", index=END, values=next_f)
+        pass
+
+    pass
+
+
+root_win = Tk()
+
+root_win.title("Treeview test")
+
+
+cols = ("file_name", "path", "file_size")
+tree = Treeview(columns=cols, show="headings")
+get_folder = Button(text="Get folder", command=get_folder_content)
+get_folder.grid(row=0, column=0, columnspan=2)
+# define headings
+tree.heading("file_name", text="File/Folder name")
+tree.heading("path", text="Absolute path")
+tree.heading("file_size", text="File size")
+
+tree.grid(row=1, column=0, sticky=(N, S, W, E))
+
+
+scrolbar = Scrollbar(orient=VERTICAL, command=tree.yview)
+scrolbar.grid(row=1, column=1, sticky=(N, S))
+tree.configure(yscrollcommand=scrolbar.set)
+
+
+tree.bind("<<TreeviewSelect>>", get_selected)
+
+root_win.mainloop()
