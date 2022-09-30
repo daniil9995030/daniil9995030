@@ -1,0 +1,41 @@
+rom time import sleep
+from tkinter import *
+from tkinter.ttk import *
+
+
+def my_start():
+    global arc1
+    for i in range(10):
+        canvas.delete(arc1)
+        arc1 = canvas.create_arc((50, 50, 150, 150), start=0, extent=i * 10, fill="red", outline="yellow")
+
+        sleep(1)
+        root_win.update()
+
+        pass
+
+    pass
+
+
+root_win = Tk()
+root_win.config(bg="#CCCCCC")
+
+canvas = Canvas(height=200, width=300, borderwidth=0, highlightthickness=0)
+# line
+l1 = canvas.create_line(0, 0, 200, 0, 0, 100, 200, 200, fill="#FF0000", dash=(2, 6))
+l2 = canvas.create_line(0, 0, 300, 200, fill="#00FF00")
+l3 = canvas.create_line(0, 2, 300, 2)
+
+# arc
+arc1 = canvas.create_arc((50, 50, 150, 150), start=0, extent=45, fill="red", outline="yellow")
+
+# oval
+oval1 = canvas.create_oval((150, 150, 300, 200), fill="green")
+
+#
+pol = canvas.create_polygon(0, 0, 10, 100, 200, 200)
+
+Button(text="Start", command=my_start).pack()
+canvas.pack(padx=20, pady=20)
+
+root_win.mainloop()
