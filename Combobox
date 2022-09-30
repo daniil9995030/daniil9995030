@@ -1,0 +1,56 @@
+from tkinter import *
+from tkinter.ttk import *
+
+def f1(e):
+    print ("Combobox item selected")
+    print (months.get())
+    pass
+
+def f2(e):
+    print ("Keyboard key released")
+    print (months.get())
+    pass
+
+def reset_selected_value(e):
+    print ("Right mouse button clicked")
+    combo.set("")
+    pass
+
+def new_values(e):
+    print ("Mouse but 2 clicked")
+    combo.config(values=("1","2","3","4","5"))
+    pass
+
+w = Tk()
+months = StringVar()
+months.set('January')
+combo = Combobox(
+    textvariable = months,
+    width=30,
+    height=4,
+    justify=CENTER,
+    state="normal",
+
+    values = (
+        'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December'
+    )
+)
+
+combo.bind("<<ComboboxSelected>>", f1)
+combo.bind("<KeyRelease>", f2)
+combo.bind("<Button-3>", reset_selected_value)
+combo.bind("<Button-2>", new_values)
+combo.pack(padx=20, pady=20)
+
+w.mainloop()
