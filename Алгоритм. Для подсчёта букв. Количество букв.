@@ -1,0 +1,3 @@
+s = input().strip().lower()
+print('Количество гласных букв равно', len([c for c in s if c in 'ауоыиэяюёе']))
+print('Количество согласных букв равно', len([c for c in s if c in 'бвгджзйклмнпрстфхцчшщ']))
