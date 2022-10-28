@@ -1,0 +1,41 @@
+import os
+import random
+import threading
+from time import sleep, time
+
+LOOPS = 5
+THREADS = 10
+START_TIME = int(time() * 1000) 
+threads = []
+os.system("\n")
+
+def print_info(msg):
+    print (f"{int(time() * 1000) - START_TIME}\t{threading.current_thread().name:10s}\t" + msg)
+    pass
+
+def thread_worker():
+    print_info("\u001b[48;5;9mSTARTED\u001b[0m")    
+    for i in range(LOOPS):
+        print_info(f"loop {i}")
+        sleep(random.randint(1, 20) / 3)
+        pass
+    print_info("\u001b[48;5;11mSTOPPED\u001b[0m")
+    pass
+
+print_info("\u001b[48;5;9mSTARTED\u001b[0m")
+ 
+
+print_info("\u001b[48;5;8mCreating threads\u001b[0m")
+for i in range(THREADS): threads.append(threading.Thread(target=thread_worker))
+
+print_info("\u001b[48;5;8mStarting threads\u001b[0m")
+for i in range(THREADS): threads[i].start()
+
+print_info("\u001b[48;5;8mWaiting for second thread\u001b[0m")
+threads[1].join() 
+print_info("\u001b[48;5;8mContinue after join\u001b[0m")
+
+
+
+
+
