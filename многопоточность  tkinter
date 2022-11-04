@@ -1,0 +1,85 @@
+from tkinter import *
+from time import sleep
+import threading
+import winsound
+
+class MyTimer(threading.Thread):    
+    def __init__(self, timer_value:Label, timer_status:Label, timer_nowtime:Label) -> None:
+        self.run_timer = False
+        self.run_thread = True
+        self.counter_value = 0
+        self.timer_value = timer_value 
+        self.timer_status = timer_status 
+        self.timer_nowtime = timer_nowtime 
+        super().__init__(name="Timer")
+    
+    def start(self) -> None:
+        return super().start() 
+    
+    def run(self) -> None: 
+        while self.run_thread:
+            sleep(0.5)
+            if not self.run_timer: continue            
+            self.counter_value += 1
+            winsound.Beep(4000, 500)
+            self.timer_value.config(text = self.counter_value)   
+            pass
+        pass
+    
+    def start_timer(self):
+       
+        self.run_timer = True
+        self.timer_status.config(text="Started")
+        pass
+    
+    def stop_timer(self):
+        
+        self.run_timer = False
+        self.counter_value = 0
+        self.timer_status.config(text="Stopped")
+        pass
+           
+    def reset_timer(self):
+        
+        self.counter_value = 0
+        self.info.config(text = self.counter_value) 
+        pass
+           
+    def pause_timer(self):
+        
+        self.run_timer = False 
+        pass
+           
+    def exit_timer(self):
+        
+        self.run_thread = False 
+        pass
+    
+    pass
+
+
+root_win = Tk()
+frame_controls = Frame()
+frame_timer = Frame()
+
+timer_value = Label(frame_timer)
+timer_status = Label(frame_timer)
+timer_nowtime = Label(frame_timer)
+timer_thread = MyTimer(timer_value, timer_status, timer_nowtime)
+
+Button(frame_controls, text="Start timer", command=timer_thread.start_timer).pack(side=LEFT, padx=20, pady=20)
+Button(frame_controls, text="Stop timer", command=timer_thread.stop_timer).pack(side=LEFT, padx=20, pady=20)
+Button(frame_controls, text="Pause timer", command=timer_thread.pause_timer).pack(side=LEFT, padx=20, pady=20)
+Button(frame_controls, text="Reset timer", command=timer_thread.reset_timer).pack(side=LEFT, padx=20, pady=20)
+
+timer_thread.start()
+
+timer_value.pack()
+timer_status.pack()
+timer_nowtime.pack()
+
+frame_controls.pack()
+frame_timer.pack()
+
+root_win.mainloop()
+
