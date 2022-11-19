@@ -1,0 +1,37 @@
+from random import randrange
+###камень1
+###ножницы2
+###бумага3
+
+
+print('камень ножницы бумага')
+
+
+
+
+
+
+user=int(input("напиши число"))
+
+
+
+
+cop=randrange(3)+1
+if cop==1:
+    print("выбор компа камень")
+elif cop==2:
+    print("выбор компа ножницы")
+elif cop==3:
+    print("выбор компа бумага")
+
+if cop==user:
+    print('ничья')
+elif cop==2:
+    print('комп победил')
+elif cop==3:
+    print("ура победа")
+
+
+
+
+
